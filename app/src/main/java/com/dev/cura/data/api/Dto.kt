@@ -16,12 +16,6 @@ data class LoginResponseDto (
     val token: String,
 )
 
-data class RegisterDto (
-    val name: String,
-    val email: String,
-    val password: String,
-    val profileImage: MultipartBody.Part?
-    )
 
 data class RegisterResponseDto (
     val response : String

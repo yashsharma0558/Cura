@@ -1,20 +1,21 @@
 package com.dev.cura.ui.auth
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
+import androidx.datastore.preferences.core.edit
 import com.dev.cura.R
+import com.dev.cura.data.api.RetrofitClient
 import com.dev.cura.data.repository.AuthRepository
+import com.dev.cura.domain.usecase.LoginUseCase
+import com.dev.cura.domain.usecase.RegisterUseCase
+import com.dev.cura.ui.SelectAddictionActivity
 import com.dev.cura.ui.viewmodel.AuthViewModel
 import com.dev.cura.ui.viewmodel.AuthViewModelFactory
 import com.dev.cura.util.Resource
@@ -27,18 +28,33 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
-
+        val apiService = RetrofitClient.instance
+        val repository = AuthRepository(this, apiService)
+        val loginUseCase = LoginUseCase(repository)
+        val registerUseCase = RegisterUseCase(repository)
+        val factory = AuthViewModelFactory(loginUseCase, registerUseCase, repository)
+        authViewModel = factory.create(AuthViewModel::class.java)
         authViewModel.loginState.observe(this) { state ->
             when (state) {
-                is Resource.Loading -> showLoading(true)
+                is Resource.Loading -> ""
                 is Resource.Success -> {
-                    showLoading(false)
+//                    showLoading(false)
                     val response = state.data
                     Toast.makeText(this, "Welcome ${response?.name}", Toast.LENGTH_SHORT).show()
+                    if (response != null) {
+                        response.image_url?.let {
+                            saveUserDetails(this, response.name, response.email,
+                                it, response.token)
+                        }
+                        Log.d("LoginResponse", "Here's your ${response}")
+                    }
+                    val intent = Intent(this, SelectAddictionActivity::class.java)
+                    startActivity(intent)
+
                 }
-                is Resource.Error ->{
-                    showLoading(false)
+
+                is Resource.Error -> {
+//                    showLoading(false)
                     Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -54,10 +70,23 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+
+        findViewById<TextView>(R.id.textView).setOnClickListener {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+
+
     }
-    private fun showLoading(isLoading: Boolean) {
-        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
-        progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    fun saveUserDetails(context: Context, name: String, email: String, photo: String, token: String) {
+        val sharedPreferences = context.getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("name", name)
+        editor.putString("email", email)
+        editor.putString("photo", photo)
+        editor.putString("token", token)
+        editor.apply() // Commit changes asynchronously
     }
+
 
 }

@@ -60,7 +60,14 @@ dependencies {
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
 
+    implementation("com.google.ai.client.generativeai:generativeai:0.7.0")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
+    implementation("androidx.activity:activity-ktx:1.7.0")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation("com.github.bumptech.glide:okhttp3-integration:4.15.1")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
+
 
 }
