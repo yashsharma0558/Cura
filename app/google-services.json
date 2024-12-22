@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "753432469174",
+    "project_id": "cura-f628e",
+    "storage_bucket": "cura-f628e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753432469174:android:e0decae2c658fc26185017",
+        "android_client_info": {
+          "package_name": "com.dev.cura"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXhXbud77j51a20tIVQk1lNWT02yUu-Xw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
