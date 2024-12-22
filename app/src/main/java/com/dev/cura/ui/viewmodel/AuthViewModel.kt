@@ -28,32 +28,6 @@ class AuthViewModel(
     private val _registerState = MutableLiveData<Resource<RegisterResponseDto>>()
     val registerState: LiveData<Resource<RegisterResponseDto>> = _registerState
 
-    private val _userDetails = MutableStateFlow<UserDetails?>(null)
-    val userDetails = _userDetails.asStateFlow()
-
-    // Save user details
-    fun saveUserDetails(name: String, email: String, photo: String, token: String) {
-        viewModelScope.launch {
-            authRepository.saveUserDetails(name, email, photo, token)
-        }
-    }
-
-    // Load user details
-    fun loadUserDetails() {
-        viewModelScope.launch {
-            authRepository.getUserDetails().collect { details ->
-                _userDetails.value = details
-            }
-        }
-    }
-
-    // Clear user details (e.g., logout)
-    fun clearUserDetails() {
-        viewModelScope.launch {
-            authRepository.clearUserDetails()
-        }
-    }
-
     fun login(email: String, password: String) {
         _loginState.value = Resource.Loading()
         viewModelScope.launch {
