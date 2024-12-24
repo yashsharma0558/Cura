@@ -1,6 +1,5 @@
 package com.dev.cura.data.api
 
-import okhttp3.MultipartBody
 
 
 data class LoginDto(
@@ -20,3 +19,5 @@ data class LoginResponseDto (
 data class RegisterResponseDto (
     val response : String
 )
+
+

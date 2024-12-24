@@ -1,4 +1,4 @@
-package com.dev.cura.ui.auth
+package com.dev.cura.ui.screen.auth
 
 import android.content.Context
 import android.graphics.Bitmap

@@ -1,4 +1,4 @@
-package com.dev.cura.ui.auth
+package com.dev.cura.ui.screen.auth
 
 import android.content.Context
 import android.content.Intent
@@ -9,13 +9,12 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.datastore.preferences.core.edit
 import com.dev.cura.R
 import com.dev.cura.data.api.RetrofitClient
 import com.dev.cura.data.repository.AuthRepository
 import com.dev.cura.domain.usecase.LoginUseCase
 import com.dev.cura.domain.usecase.RegisterUseCase
-import com.dev.cura.ui.SelectAddictionActivity
+import com.dev.cura.ui.screen.addictionselect.SelectAddictionActivity
 import com.dev.cura.ui.viewmodel.AuthViewModel
 import com.dev.cura.ui.viewmodel.AuthViewModelFactory
 import com.dev.cura.util.Resource
@@ -85,6 +84,7 @@ class LoginActivity : AppCompatActivity() {
         editor.putString("email", email)
         editor.putString("photo", photo)
         editor.putString("token", token)
+        editor.putBoolean("hasCompletedSurvey", false)
         editor.apply() // Commit changes asynchronously
     }
 

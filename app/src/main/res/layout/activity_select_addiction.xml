@@ -5,21 +5,19 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SelectAddictionActivity"
+    tools:context=".ui.screen.addictionselect.SelectAddictionActivity"
     tools:ignore="VisualLintBounds">
-
 
     <TextView
         android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="24dp"
         android:text="Choose your"
         android:textColor="@color/white"
         android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.242"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,18 +34,46 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/tv1"
         app:layout_constraintTop_toBottomOf="@+id/tv1" />
-
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="300dp"
-        android:layout_height="500dp"
-        android:layout_marginTop="24dp"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:elevation="18dp"
         android:background="@drawable/list_rectangle_bg"
-        android:padding="20dp"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv2" />
+        app:layout_constraintTop_toBottomOf="@+id/tv2" >
+        <RadioButton
+            android:id="@+id/radioAlcohol"
+            android:paddingVertical="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Alcohol Addiction" />
+
+        <RadioButton
+            android:id="@+id/radioSubstance"
+            android:paddingVertical="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Substance Addiction" />
+
+        <RadioButton
+            android:id="@+id/radioSmoking"
+            android:paddingVertical="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Smoking Addiction" />
+
+        <RadioButton
+            android:id="@+id/radioCaffeine"
+            android:paddingVertical="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Caffeine Addiction" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/tvnext"
@@ -61,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.811"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

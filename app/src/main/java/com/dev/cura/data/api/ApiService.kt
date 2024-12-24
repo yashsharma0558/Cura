@@ -1,8 +1,9 @@
 package com.dev.cura.data.api
 
+import com.google.gson.JsonObject
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.Response
+import retrofit2.Response
 import okhttp3.ResponseBody
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -27,5 +28,19 @@ interface ApiService {
 
     @GET
     suspend fun verify( @Url verifyUrl: String ): ResponseBody
+
+    // GET request to retrieve remedy JSON
+    @GET("auth/remedy")
+    suspend fun getRemedy(
+        @Query("email") email: String
+    ): Response<JsonObject>
+
+    // POST request to update remedy JSON
+    @POST("auth/remedy")
+    suspend fun setRemedy(
+        @Query("email") email: String,
+        @Body remedy: JsonObject
+    ): Response<JsonObject>
+
 }
 
