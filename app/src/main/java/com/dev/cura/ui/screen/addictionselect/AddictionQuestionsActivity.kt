@@ -105,14 +105,15 @@ class AddictionQuestionsActivity : AppCompatActivity() {
                             startActivity(Intent(this@AddictionQuestionsActivity,HomeActivity::class.java ))
                             finish()
                         } else {
-                            println("Error: ${response.errorBody()?.string()}")
+                            Log.d("AIHERELOL", "${response.errorBody()?.string()}")
+
                         }
                     } catch (e: Exception) {
-                        println("Exception: ${e.message}")
+                        Log.d("AIHERELOL", "${e.message}")
                     }
                     // Example: Update UI or process data
                 } else {
-                    println("Survey Response is null")
+                    Log.d("AIHERELOL", "Survey Response is null")
                 }
 
             }

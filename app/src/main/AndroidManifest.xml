@@ -34,6 +34,9 @@
             android:name=".ui.screen.auth.LoginActivity"
             android:exported="false" />
         <activity
+        android:name=".ui.screen.home.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.screen.Onboarding"
             android:exported="true">
             <intent-filter>
