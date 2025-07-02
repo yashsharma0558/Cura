@@ -3,6 +3,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Set the gradient drawable as the background for all activities -->
         <item name="android:windowBackground">@drawable/gradient_bg</item>
+        <item name="android:statusBarColor">#9747FF</item>
     </style>
 
     <style name="Theme.Cura" parent="AppTheme" />

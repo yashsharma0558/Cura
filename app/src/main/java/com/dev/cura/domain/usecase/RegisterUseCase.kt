@@ -1,6 +1,6 @@
 package com.dev.cura.domain.usecase
 
-import com.dev.cura.data.api.RegisterResponseDto
+import com.dev.cura.data.model.RegisterResponseDto
 import com.dev.cura.data.repository.AuthRepository
 import okhttp3.MultipartBody
 

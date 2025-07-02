@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.secretsGradlePlugin)
     id("com.google.devtools.ksp")
+
 }
 val properties = Properties().apply {
     load(project.rootProject.file("local.properties").inputStream())
@@ -84,6 +85,9 @@ dependencies {
 
     implementation( "androidx.navigation:navigation-fragment-ktx:2.6.0")
     implementation ("androidx.navigation:navigation-ui-ktx:2.6.0")
+
+    implementation ("com.squareup.picasso:picasso:2.8")
+
 
 
 }

@@ -152,3 +152,8 @@ enum class Remedies(val remedy: List<Map<String, String>>) {
     )
 
 }
+data class RemedialData(
+    val iconResId: Int,
+    val title:String
+)
+

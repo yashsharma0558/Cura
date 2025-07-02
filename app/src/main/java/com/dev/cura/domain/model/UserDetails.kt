@@ -4,5 +4,6 @@ data class UserDetails(
     val name: String,
     val email: String,
     val photo: String,
-    val token: String
+    val token: String,
+    val surveyResponse: SurveyResponse
 )

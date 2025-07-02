@@ -1,15 +1,18 @@
 package com.dev.cura.ui.screen.auth
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +37,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var authViewModel: AuthViewModel
     private lateinit var imageView: ImageView
+    private lateinit var loginBtn: TextView
     private lateinit var imagePath: MultipartBody.Part
 
     // Register the activity result contract
@@ -60,20 +64,24 @@ class RegisterActivity : AppCompatActivity() {
             // Launch the image picker
             imagePickerLauncher.launch("image/*")
         }
+        loginBtn = findViewById(R.id.textView)
+        loginBtn.setOnClickListener {
+            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+            finish()
+        }
 
         authViewModel.registerState.observe(this) { state ->
             when (state) {
                 is Resource.Loading -> ""
                 is Resource.Success -> {
-//                    showLoading(false)
                     val response = state.data
-                    Toast.makeText(this, response?.response, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "SUCCESS"+response?.response, Toast.LENGTH_SHORT).show()
                     finish()
                 }
 
                 is Resource.Error -> {
-//                    showLoading(false)
-                    Toast.makeText(this, state.message, Toast.LENGTH_SHORT).show()
+                    Log.d("REGISTER ACTIVITY", state.message.toString())
+                    Toast.makeText(this, "Failure"+state.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -82,17 +90,15 @@ class RegisterActivity : AppCompatActivity() {
             val name = findViewById<EditText>(R.id.nameEditText).text.toString().trim()
             val email = findViewById<EditText>(R.id.passwordEditText).text.toString().trim()
             val password = findViewById<EditText>(R.id.passwordInput).text.toString()
-//            val profileImage = createMultipartBodyPart(imagePath, "profileImage")
-
             authViewModel.register(name, email, password, imagePath)
         }
     }
-//
-//    private fun createMultipartBodyPart(filePath: String, partName: String): MultipartBody.Part {
-//        val file = File(filePath)
-//        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-//        return MultipartBody.Part.createFormData(partName, file.name, requestBody)
-//    }
+
+    private fun createMultipartBodyPart(filePath: String, partName: String): MultipartBody.Part {
+        val file = File(filePath)
+        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+        return MultipartBody.Part.createFormData(partName, file.name, requestBody)
+    }
 
     // Handle the image URI
     private fun handleImageUri(uri: Uri) {
@@ -127,7 +133,7 @@ class RegisterActivity : AppCompatActivity() {
         return uri.path ?: "Unknown Path"
     }
 
-    fun compressAndConvertImage(context: Context, imageUri: Uri, maxFileSizeInBytes: Int = 2 * 1024 * 1024): File? {
+    fun compressAndConvertImage(context: Context, imageUri: Uri, maxFileSizeInBytes: Int = 1 * 1024 * 1024): File? {
         try {
             // Load the image as a Bitmap
             val inputStream = context.contentResolver.openInputStream(imageUri)
@@ -157,10 +163,5 @@ class RegisterActivity : AppCompatActivity() {
             return null
         }
     }
-
-//    private fun showLoading(isLoading: Boolean) {
-//        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
-//        progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-//    }
 
 }

@@ -4,15 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dev.cura.data.api.LoginResponseDto
-import com.dev.cura.data.api.RegisterResponseDto
+import com.dev.cura.data.model.LoginResponseDto
+import com.dev.cura.data.model.RegisterResponseDto
 import com.dev.cura.data.repository.AuthRepository
-import com.dev.cura.domain.model.UserDetails
 import com.dev.cura.domain.usecase.LoginUseCase
 import com.dev.cura.domain.usecase.RegisterUseCase
 import com.dev.cura.util.Resource
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 

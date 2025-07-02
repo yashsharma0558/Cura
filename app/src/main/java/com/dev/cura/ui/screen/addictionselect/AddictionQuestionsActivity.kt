@@ -15,6 +15,7 @@ import com.dev.cura.domain.model.GenAiPrompt
 import com.dev.cura.domain.model.GenAiRequest
 import com.dev.cura.domain.model.RemedialPlan
 import com.dev.cura.domain.model.Remedies
+import com.dev.cura.domain.model.SurveyResponse
 import com.dev.cura.ui.adapter.SurveyAdapter
 import com.dev.cura.ui.screen.home.HomeActivity
 import com.google.ai.client.generativeai.GenerativeModel
@@ -102,7 +103,7 @@ class AddictionQuestionsActivity : AppCompatActivity() {
                             val editor = sharedPreferences.edit()
                             editor.putBoolean("hasCompletedSurvey", true)
                             editor.apply()
-                            startActivity(Intent(this@AddictionQuestionsActivity,HomeActivity::class.java ))
+                            startActivity(Intent(this@AddictionQuestionsActivity, HomeActivity::class.java ))
                             finish()
                         } else {
                             Log.d("AIHERELOL", "${response.errorBody()?.string()}")
@@ -129,8 +130,9 @@ class AddictionQuestionsActivity : AppCompatActivity() {
         val response = generativeModel.generateContent(prompt)
         val finalString = response.text?.let { extractBracesContent(it) } ?:return null
         val gson = Gson()
-        Log.d("AIHERELOL", "SurveyResponse: $finalString")
+        Log.d("AIHERELOL", "SurveyResponse: ${gson.fromJson(finalString, SurveyResponse::class.java)}")
         return gson.fromJson(finalString, JsonObject::class.java)
+
     }
 
     private fun extractBracesContent(input: String): String? {

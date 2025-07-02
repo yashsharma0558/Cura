@@ -3,9 +3,9 @@ package com.dev.cura.data.repository
 import android.content.Context
 import android.util.Log
 import com.dev.cura.data.api.ApiService
-import com.dev.cura.data.api.LoginDto
-import com.dev.cura.data.api.LoginResponseDto
-import com.dev.cura.data.api.RegisterResponseDto
+import com.dev.cura.data.model.LoginDto
+import com.dev.cura.data.model.LoginResponseDto
+import com.dev.cura.data.model.RegisterResponseDto
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.toRequestBody

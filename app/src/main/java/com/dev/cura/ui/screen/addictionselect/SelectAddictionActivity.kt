@@ -35,6 +35,7 @@ class SelectAddictionActivity : AppCompatActivity() {
                 val intent = Intent(this, AddictionQuestionsActivity::class.java)
                 intent.putExtra("addictionName", selectedAddiction)
                 startActivity(intent)
+                finish()
             } else {
                 // Handle case where no option is selected
                 Toast.makeText(this, "Please select an addiction type", Toast.LENGTH_SHORT).show()
